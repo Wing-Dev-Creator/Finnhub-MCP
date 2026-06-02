@@ -1,0 +1,21 @@
+name = "equity-intel-mcp"
+main = "src/index.ts"
+compatibility_date = "2026-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Durable Object binding required by the agents/McpAgent pattern.
+# It holds per-session MCP state (transport, server lifecycle).
+[[durable_objects.bindings]]
+name = "MCP_OBJECT"
+class_name = "EquityIntelMCP"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["EquityIntelMCP"]
+
+# Secrets (set with `wrangler secret put FINNHUB_API_KEY`):
+#   FINNHUB_API_KEY  — required, get one free at https://finnhub.io/register
+#
+# Optional vars below. Override per environment in your fork if you want.
+[vars]
+USER_AGENT = "equity-intel-mcp (github.com/YOUR_USERNAME/equity-intel-mcp)"

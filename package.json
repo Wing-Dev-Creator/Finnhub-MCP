@@ -1,0 +1,39 @@
+{
+  "name": "equity-intel-mcp",
+  "version": "0.1.0",
+  "description": "An open-source MCP server that gives AI agents rich equity research signals — Finnhub news/analyst/insider/social/congressional data, SEC filings, and backup quotes — deployable to Cloudflare Workers in one command.",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "agents": "^0.0.95",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260101.0",
+    "prettier": "^3.3.0",
+    "typescript": "^5.5.0",
+    "wrangler": "^3.95.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "finance",
+    "stocks",
+    "trading",
+    "finnhub",
+    "sec-edgar",
+    "cloudflare-workers"
+  ]
+}
