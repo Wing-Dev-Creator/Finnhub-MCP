@@ -3,6 +3,7 @@ import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 export interface Env {
   FINNHUB_API_KEY: string;
   USER_AGENT: string;
+  SEC_USER_AGENT: string;
   MCP_OBJECT: DurableObjectNamespace;
 }
 

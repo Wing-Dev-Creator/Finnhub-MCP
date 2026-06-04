@@ -1,3 +1,9 @@
 # Copy to `.dev.vars` for local development with `wrangler dev`.
-# For production: `wrangler secret put FINNHUB_API_KEY`
+# For production: `wrangler secret put FINNHUB_API_KEY` and `wrangler secret put SEC_USER_AGENT`
+
+# Get a free key at https://finnhub.io/register
 FINNHUB_API_KEY=your_finnhub_api_key_here
+
+# Required by SEC EDGAR. Format: "AppName your.email@example.com"
+# SEC uses this purely to contact you if your script misbehaves.
+SEC_USER_AGENT=equity-intel-mcp your.email@example.com

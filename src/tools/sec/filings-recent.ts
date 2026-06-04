@@ -11,9 +11,14 @@ async function getTickerMap(userAgent: string): Promise<Map<string, { cik: strin
   if (!tickerMapPromise) {
     tickerMapPromise = (async () => {
       const res = await fetch("https://www.sec.gov/files/company_tickers.json", {
-        headers: { "User-Agent": userAgent, Accept: "application/json" },
+        headers: {
+          "User-Agent": userAgent,
+          Accept: "application/json",
+          "Accept-Encoding": "gzip, deflate",
+          Host: "www.sec.gov",
+        },
       });
-      if (!res.ok) throw new Error(`SEC tickers fetch ${res.status}`);
+      if (!res.ok) throw new Error(`SEC tickers fetch ${res.status} — SEC requires a User-Agent with contact email. Set SEC_USER_AGENT in wrangler.toml to "your-app your-email@example.com".`);
       const data = (await res.json()) as Record<string, { cik_str: number; ticker: string; title: string }>;
       const map = new Map<string, { cik: string; title: string }>();
       for (const v of Object.values(data)) {
@@ -57,12 +62,16 @@ export const registerSecFilingsRecent: ToolRegistrar = (server, env) => {
     },
     async ({ symbol, forms, limit }) => {
       try {
-        const map = await getTickerMap(env.USER_AGENT);
+        const map = await getTickerMap(env.SEC_USER_AGENT);
         const hit = map.get(symbol.toUpperCase());
         if (!hit) return err(`Ticker ${symbol} not found in SEC EDGAR (must be US-listed)`);
 
         const submissionsRes = await fetch(`https://data.sec.gov/submissions/CIK${hit.cik}.json`, {
-          headers: { "User-Agent": env.USER_AGENT, Accept: "application/json" },
+          headers: {
+            "User-Agent": env.SEC_USER_AGENT,
+            Accept: "application/json",
+            Host: "data.sec.gov",
+          },
         });
         if (!submissionsRes.ok) return err(`SEC submissions ${submissionsRes.status}`);
         const data = (await submissionsRes.json()) as Submissions;

@@ -44,6 +44,11 @@ npx wrangler login
 npx wrangler secret put FINNHUB_API_KEY
 # (paste your key when prompted)
 
+# Set your SEC contact User-Agent. SEC EDGAR requires this to identify
+# you in case your script misbehaves. Format: "AppName your.email@example.com"
+npx wrangler secret put SEC_USER_AGENT
+# (paste e.g. "equity-intel-mcp your.email@example.com" when prompted)
+
 # Deploy
 npm run deploy
 ```

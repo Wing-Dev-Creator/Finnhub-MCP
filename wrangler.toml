@@ -13,9 +13,10 @@ class_name = "EquityIntelMCP"
 tag = "v1"
 new_sqlite_classes = ["EquityIntelMCP"]
 
-# Secrets (set with `wrangler secret put FINNHUB_API_KEY`):
-#   FINNHUB_API_KEY  — required, get one free at https://finnhub.io/register
-#
-# Optional vars below. Override per environment in your fork if you want.
+# Secrets (set each with `wrangler secret put <NAME>`):
+#   FINNHUB_API_KEY  — required for Finnhub tools. Get one free at https://finnhub.io/register
+#   SEC_USER_AGENT   — required for the sec_filings_recent tool. Format: "AppName your.email@example.com"
+#                      SEC EDGAR uses this to identify and contact you if your script misbehaves.
+#                      Without it, SEC returns HTTP 403.
 [vars]
 USER_AGENT = "equity-intel-mcp (github.com/YOUR_USERNAME/equity-intel-mcp)"
