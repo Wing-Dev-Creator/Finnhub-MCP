@@ -11,6 +11,7 @@ import { registerCongressionalTrades } from "./finnhub/congressional-trades";
 import { registerEconomicCalendar } from "./finnhub/economic-calendar";
 import { registerSecFilingsRecent } from "./sec/filings-recent";
 import { registerAggQuote } from "./yahoo/agg-quote";
+import { registerRsi } from "./yahoo/rsi";
 
 // Add new tool registrars here. Each one self-contained — see CONTRIBUTING.md.
 export const TOOLS: ToolRegistrar[] = [
@@ -28,4 +29,5 @@ export const TOOLS: ToolRegistrar[] = [
   registerSecFilingsRecent,
   // Yahoo Finance
   registerAggQuote,
+  registerRsi,
 ];
